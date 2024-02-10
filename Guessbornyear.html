@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Age Calculator</title>
+<style>
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        text-align: center;
+        background-color: #1a1a1a;
+        color: #fff;
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        max-width: 600px;
+        margin: 50px auto;
+        padding: 20px;
+        background-color: #282828;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    }
+
+    h1 {
+        color: #ffae42;
+        font-weight: normal;
+        margin-bottom: 20px;
+    }
+
+    #birthdate-input {
+        margin-top: 20px;
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #555;
+        border-radius: 5px;
+        background-color: #444;
+        color: #fff;
+        width: 100%;
+        box-sizing: border-box;
+        outline: none;
+    }
+
+    #calculate-btn {
+        margin-top: 20px;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        background-color: #ffae42;
+        color: #1a1a1a;
+        border: none;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+    }
+
+    #calculate-btn:hover {
+        background-color: #ffb84d;
+    }
+
+    #result {
+        margin-top: 20px;
+        font-size: 20px;
+        font-weight: bold;
+    }
+</style>
+</head>
+<body>
+<div class="container">
+    <h1>Age Calculator</h1>
+    <input type="date" id="birthdate-input">
+    <button id="calculate-btn">Calculate Age</button>
+    <div id="result"></div>
+</div>
+
+<script>
+    // Get birthdate input, calculate button, and result elements
+    const birthdateInput = document.getElementById('birthdate-input');
+    const calculateBtn = document.getElementById('calculate-btn');
+    const resultDiv = document.getElementById('result');
+
+    // Add event listener to the calculate button
+    calculateBtn.addEventListener('click', () => {
+        const birthdate = new Date(birthdateInput.value); // Parse birthdate from input
+        const today = new Date(); // Get current date
+
+        // Calculate age
+        const age = today.getFullYear() - birthdate.getFullYear();
+        const monthDiff = today.getMonth() - birthdate.getMonth();
+        if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthdate.getDate())) {
+            resultDiv.textContent = 'Your age is ' + (age - 1) + ' years.';
+        } else {
+            resultDiv.textContent = 'Your age is ' + age + ' years.';
+        }
+    });
+</script>
+</body>
+</html>
